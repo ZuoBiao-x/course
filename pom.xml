@@ -48,6 +48,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--只需要在父项目中引入版本信息，子模块中需要使用的时候只需要导入即可，不需要再次指定版本号，因为有父项目来进行版本控制-->
+            <!-- 集成mybatis -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+            <!--驱动jar包-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.37</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
