@@ -178,9 +178,4 @@
       age = #{age,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-    <select id="queryTest" resultType="com.course.server.domain.Test">
-        select ct.username, ct.age from course.test ct
-    </select>
-
 </mapper>

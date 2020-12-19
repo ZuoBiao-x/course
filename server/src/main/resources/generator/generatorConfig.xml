@@ -11,6 +11,8 @@
 
         <!-- 生成的实体类添加toString()方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <!--解决mapper.xml重复生成代码的问题(如果要生成的mapper.xml已经存在，那么就会将原有的代码覆盖掉)-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
 
         <!-- 不生成注释 -->
         <commentGenerator>
