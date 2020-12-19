@@ -1,11 +1,19 @@
 package com.course.server.domain;
 
-/**
- * 2020年12月19日00:09:36
- */
 public class Test {
+    private Integer id;
+
     private String username;
+
     private Integer age;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -21,5 +29,18 @@ public class Test {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", username=").append(username);
+        sb.append(", age=").append(age);
+        sb.append("]");
+        return sb.toString();
     }
 }

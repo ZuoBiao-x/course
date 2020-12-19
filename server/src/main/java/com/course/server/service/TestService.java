@@ -17,6 +17,7 @@ public class TestService {
     private TestMapper testMapper;
 
     public List<Test> queryTest(){
-        return this.testMapper.queryTest();
+//        return this.testMapper.queryTest();
+        return null;
     }
 }
