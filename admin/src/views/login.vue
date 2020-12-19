@@ -56,8 +56,9 @@
   		</div><!-- /.main-container -->
 </template>
 
-<script>
-$('body').attr('class', 'login-layout light-login');
+<script >
+	$('body').removeClass('no-skin');
+	$('body').attr('class', 'login-layout light-login');
 
 export default {
   name: 'Login',
