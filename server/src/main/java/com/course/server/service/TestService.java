@@ -1,6 +1,7 @@
 package com.course.server.service;
 
 import com.course.server.domain.Test;
+import com.course.server.domain.TestExample;
 import com.course.server.mapper.TestMapper;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,9 @@ public class TestService {
     private TestMapper testMapper;
 
     public List<Test> queryTest(){
-//        return this.testMapper.queryTest();
-        return null;
+        TestExample testExample = new TestExample();
+//        testExample.createCriteria().andIdEqualTo(1);
+        testExample.setOrderByClause("id desc");
+        return testMapper.selectByExample(testExample);
     }
 }
