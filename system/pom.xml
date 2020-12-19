@@ -30,5 +30,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!--导入公共模块 server-->
+        <dependency>
+            <groupId>com.zuobiao</groupId>
+            <artifactId>server</artifactId>
+        </dependency>
     </dependencies>
 </project>
