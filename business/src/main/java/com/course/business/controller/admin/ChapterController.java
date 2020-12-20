@@ -13,14 +13,14 @@ import java.util.List;
  * 2020年12月19日00:12:14
  */
 @RestController
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin/chapter")
 public class ChapterController {
 
     @Resource
     private ChapterService chapterService;
 
-    @GetMapping(value = "/chapter")
-    public List<ChapterDto> chapter(){
+    @GetMapping(value = "/list")
+    public List<ChapterDto> list(){
         return chapterService.queryChapter();
     }
 
