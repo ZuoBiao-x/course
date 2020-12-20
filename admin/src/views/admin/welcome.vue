@@ -6,7 +6,13 @@
 
 <script>
     export default {
-        name: "Welcome"
+        name: "Welcome",
+        /*用于在组件被渲染的时候，告诉admin父组件，需要给哪个菜单设置样式*/
+        mounted: function() {
+            this.$parent.activeSidebar("welcome-sidebar");
+        },
+        methods: {
+        }
     }
 </script>
 
