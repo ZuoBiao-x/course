@@ -9,7 +9,8 @@
         name: "Welcome",
         /*用于在组件被渲染的时候，告诉admin父组件，需要给哪个菜单设置样式*/
         mounted: function() {
-            this.$parent.activeSidebar("welcome-sidebar");
+            // sidebar激活样式方法一
+            // this.$parent.activeSidebar("welcome-sidebar");
         },
         methods: {
         }
