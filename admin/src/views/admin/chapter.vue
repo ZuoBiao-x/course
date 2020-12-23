@@ -29,55 +29,12 @@
                 <td>{{chapter.courseId}}</td>
                 <td>
                     <div class="hidden-sm hidden-xs btn-group">
-                        <button class="btn btn-xs btn-success">
-                            <i class="ace-icon fa fa-check bigger-120"></i>
-                        </button>
-
-                        <button class="btn btn-xs btn-info">
+                        <button class="btn btn-xs btn-info" @click="edit(chapter)">
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>
-
                         <button class="btn btn-xs btn-danger">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                         </button>
-
-                        <button class="btn btn-xs btn-warning">
-                            <i class="ace-icon fa fa-flag bigger-120"></i>
-                        </button>
-                    </div>
-
-                    <div class="hidden-md hidden-lg">
-                        <div class="inline pos-rel">
-                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                            </button>
-
-                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                <li>
-                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                  <span class="blue">
-                                    <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                  </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                  <span class="green">
-                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                  </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                  <span class="red">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                  </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </td>
             </tr>
@@ -92,7 +49,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">大章新增</h4>
+                        <h4 class="modal-title" id="myModalLabel">大章</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal">
@@ -111,7 +68,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         <button type="button" class="btn btn-primary" @click="save">保存</button>
                     </div>
                 </div>
@@ -153,6 +110,16 @@
             },
 
             add(){
+                let _this = this;
+                _this.chapter = {};
+                    $('#form-modal').modal('show');
+            },
+
+            edit(chapter){
+                let _this = this;
+                /*将列表中对应的chapter拷贝一份，并赋值给_this.chapter，
+                这样的话，模态框中显示的数据和列表中的数据是来自两个不同的对象，因此改变模态框中的值不会改变列表中记录的值*/
+                _this.chapter = $.extend({}, chapter);
                 $('#form-modal').modal('show');
             },
 
