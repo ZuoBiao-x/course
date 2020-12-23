@@ -9,6 +9,18 @@ Vue.config.productionTip = false;
 // 又因为 Vue.prototype.xxx 表示的对象为全局对象，所以，可以在之后的组件中通过 this.$ajax 来使用 $ajax 对象
 Vue.prototype.$ajax = axios;
 
+/**
+ * axios拦截器
+ */
+axios.interceptors.request.use(function (config) {
+  console.log("请求：", config);
+  return config;
+}, error => {});
+axios.interceptors.response.use(function (response) {
+  console.log("返回结果：", response);
+  return response;
+}, error => {});
+
 new Vue({
   router,
   render: h => h(App),

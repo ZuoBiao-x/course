@@ -34,6 +34,9 @@ public class ChapterService {
      * 实际开发中几乎不会这样做，但由于这里是请求和响应都封装在一个对象中，所以为了简便才会这样做
      * @param pageDto
      */
+    /**
+     * 列表查询
+     */
     public void queryChapter(PageDto pageDto){
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         ChapterExample chapterExample = new ChapterExample();
@@ -70,15 +73,27 @@ public class ChapterService {
         }
     }
 
+    /**
+     * 添加
+     * @param chapter
+     */
     private void insert(Chapter chapter){
         chapter.setId(UuidUtil.getShortUuid());
         chapterMapper.insert(chapter);
     }
 
+    /**
+     * 修改
+     * @param chapter
+     */
     private void update(Chapter chapter){
         chapterMapper.updateByPrimaryKey(chapter);
     }
 
+    /**
+     * 删除
+     * @param id
+     */
     public void delete(String id){
         chapterMapper.deleteByPrimaryKey(id);
     }

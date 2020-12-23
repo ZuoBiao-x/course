@@ -97,6 +97,9 @@
             _this.list(1);                      // 初始化页码
         },
         methods: {
+            /**
+             * 列表查询
+             */
             list(page) {
                 let _this = this;
                 Loading.show();
@@ -105,18 +108,23 @@
                     size: _this.$refs.pagination.size,
                 }).then((response)=>{
                     Loading.hide();
-                    console.log(response);
                     _this.chapters = response.data.content.list;
                     _this.$refs.pagination.render(page, response.data.content.total);
                 })
             },
 
+            /**
+             * 点击【新增】
+             */
             add(){
                 let _this = this;
                 _this.chapter = {};
                     $('#form-modal').modal('show');
             },
 
+            /**
+             * 点击【编辑】
+             */
             edit(chapter){
                 let _this = this;
                 /*将列表中对应的chapter拷贝一份，并赋值给_this.chapter，
@@ -125,6 +133,9 @@
                 $('#form-modal').modal('show');
             },
 
+            /**
+             * 点击【保存】
+             */
             save(){
                 let _this = this;
 
@@ -138,7 +149,6 @@
                 Loading.show();
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save', _this.chapter).then((response)=>{
                     Loading.hide();
-                    console.log(response);
                     /*保存成功，则隐藏模态框，刷新数据*/
                     if (response.data.success){
                         $('#form-modal').modal('hide');
@@ -150,13 +160,15 @@
                 })
             },
 
+            /**
+             * 点击【删除】
+             */
             del(id){
                 let _this = this;
                 Confirm.show("删除大章后不可恢复，确认删除？", function () {
                     Loading.show();
                     _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id).then((response)=>{
                         Loading.hide();
-                        console.log("删除大章列表结果：", response);
                         let resp = response.data;
                         if (resp.success) {
                             _this.list(1);
