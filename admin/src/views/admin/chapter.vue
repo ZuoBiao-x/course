@@ -87,7 +87,7 @@
         <pagination ref="pagination" v-bind:list="list" v-bind:itemCount="5"></pagination>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -147,19 +147,24 @@
                     size: _this.$refs.pagination.size,
                 }).then((response)=>{
                     console.log(response);
-                    _this.chapters = response.data.list;
-                    _this.$refs.pagination.render(page, response.data.total);
+                    _this.chapters = response.data.content.list;
+                    _this.$refs.pagination.render(page, response.data.content.total);
                 })
             },
 
             add(){
-                $('.modal').modal('show');
+                $('#form-modal').modal('show');
             },
 
             save(){
                 let _this = this;
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save', _this.chapter).then((response)=>{
                     console.log(response);
+                    /*保存成功，则隐藏模态框，刷新数据*/
+                    if (response.data.success){
+                        $('#form-modal').modal('hide');
+                        _this.list(1);
+                    }
                 })
             }
         }

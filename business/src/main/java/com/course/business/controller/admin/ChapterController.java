@@ -2,6 +2,7 @@ package com.course.business.controller.admin;
 
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
+import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,16 +26,20 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @PostMapping(value = "/list")
-    public PageDto list(@RequestBody PageDto pageDto){
+    public ResponseDto list(@RequestBody PageDto pageDto){
         chapterService.queryChapter(pageDto);
-        return pageDto;
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setContent(pageDto);
+        return responseDto;
     }
 
     @PostMapping(value = "/save")
-    public ChapterDto save(@RequestBody ChapterDto chapterDto){
+    public ResponseDto save(@RequestBody ChapterDto chapterDto){
         LOG.info("chapterDto: {}", chapterDto);
         chapterService.save(chapterDto);
-        return chapterDto;
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setContent(chapterDto);
+        return responseDto;
     }
 
 }
