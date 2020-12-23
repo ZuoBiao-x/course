@@ -144,6 +144,8 @@
                         $('#form-modal').modal('hide');
                         _this.list(1);
                         toast.success("保存成功！");
+                    }else {
+                        toast.warning(response.data.message)
                     }
                 })
             },
