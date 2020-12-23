@@ -145,7 +145,7 @@
                 Swal.fire({
                     title: '是否删除?',
                     text: "",
-                    // type: 'warning',
+                    icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
