@@ -32,7 +32,7 @@
                         <button class="btn btn-xs btn-info" @click="edit(chapter)">
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>
-                        <button class="btn btn-xs btn-danger">
+                        <button class="btn btn-xs btn-danger" @click="del(chapter.id)">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                         </button>
                     </div>
@@ -130,6 +130,16 @@
                     /*保存成功，则隐藏模态框，刷新数据*/
                     if (response.data.success){
                         $('#form-modal').modal('hide');
+                        _this.list(1);
+                    }
+                })
+            },
+
+            del(id){
+                let _this = this;
+                _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id).then((response)=>{
+                    console.log(response);
+                    if (response.data.success){
                         _this.list(1);
                     }
                 })
