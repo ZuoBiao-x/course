@@ -99,10 +99,12 @@
         methods: {
             list(page) {
                 let _this = this;
+                Loading.show();
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
                     page: page,
                     size: _this.$refs.pagination.size,
                 }).then((response)=>{
+                    Loading.hide();
                     console.log(response);
                     _this.chapters = response.data.content.list;
                     _this.$refs.pagination.render(page, response.data.content.total);
@@ -125,7 +127,9 @@
 
             save(){
                 let _this = this;
+                Loading.show();
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save', _this.chapter).then((response)=>{
+                    Loading.hide();
                     console.log(response);
                     /*保存成功，则隐藏模态框，刷新数据*/
                     if (response.data.success){
@@ -148,7 +152,9 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value) {
+                        Loading.show();
                         _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id).then((response)=>{
+                            Loading.hide();
                             if (response.data.success){
                                 _this.list(1);
                                 toast.success("删除成功！");
