@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>
-            <button v-on:click="list()" class="btn btn-white btn-default btn-round">
+            <button v-on:click="list(1)" class="btn btn-white btn-default btn-round">
                 <i class="ace-icon fa fa-refresh"></i>
                 刷新
             </button>
@@ -77,12 +77,15 @@
             </tr>
             </tbody>
         </table>
+        <pagination ref="pagination" v-bind:list="list" v-bind:itemCount="5"></pagination>
     </div>
 </template>
 
 <script>
+    import Pagination from "../../components/pagination";
     export default {
         name: "Chapter",
+        components: {Pagination},
         data: function(){
             return {
                 chapters: []
@@ -93,17 +96,19 @@
             // this.$parent.activeSidebar("business-chapter-sidebar");
 
             let _this = this;
-            _this.list();
+            _this.$refs.pagination.size = 5;    // 初始化每页记录数
+            _this.list(1);                      // 初始化页码
         },
         methods: {
-            list() {
+            list(page) {
                 let _this = this;
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
-                    page: 1,
-                    size: 5
+                    page: page,
+                    size: _this.$refs.pagination.size,
                 }).then((response)=>{
                     console.log(response);
                     _this.chapters = response.data.list;
+                    _this.$refs.pagination.render(page, response.data.total);
                 })
             }
         }
