@@ -4,6 +4,7 @@ import com.course.server.domain.Chapter;
 import com.course.server.domain.ChapterExample;
 import com.course.server.dto.ChapterDto;
 import com.course.server.mapper.ChapterMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class ChapterService {
     private ChapterMapper chapterMapper;
 
     public List<ChapterDto> queryChapter(){
+        PageHelper.startPage(1, 2);
         ChapterExample chapterExample = new ChapterExample();
         chapterExample.setOrderByClause("id desc");
 
