@@ -99,20 +99,20 @@
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">名称</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" placeholder="请输入大章名称...">
+                                    <input type="text" class="form-control" id="name" placeholder="请输入大章名称..." v-model="chapter.name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="chapterId" class="col-sm-2 control-label">课程ID</label>
+                                <label for="chapterID" class="col-sm-2 control-label">课程ID</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="chapterId" placeholder="请输入大章ID...">
+                                    <input type="text" class="form-control" id="chapterID" placeholder="请输入大章ID..." v-model="chapter.courseId">
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" @click="save">保存</button>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,8 @@
         components: {Pagination},
         data: function(){
             return {
-                chapters: []
+                chapters: [],
+                chapter: {}
             }
         },
         mounted: function() {
@@ -150,8 +151,16 @@
                     _this.$refs.pagination.render(page, response.data.total);
                 })
             },
+
             add(){
                 $('.modal').modal('show');
+            },
+
+            save(){
+                let _this = this;
+                _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save', _this.chapter).then((response)=>{
+                    console.log(response);
+                })
             }
         }
     }
