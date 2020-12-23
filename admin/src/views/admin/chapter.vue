@@ -131,6 +131,7 @@
                     if (response.data.success){
                         $('#form-modal').modal('hide');
                         _this.list(1);
+                        toast.success("保存成功！");
                     }
                 })
             },
@@ -139,8 +140,8 @@
                 let _this = this;
                 Swal.fire({
                     title: '是否删除?',
-                    text: "操作结果不可恢复，请谨慎操作!",
-                    type: 'warning',
+                    text: "",
+                    // type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
@@ -149,19 +150,12 @@
                     if (result.value) {
                         _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id).then((response)=>{
                             if (response.data.success){
-                                Swal.fire(
-                                    '删除成功!',
-                                    '',
-                                    'success'
-                                );
                                 _this.list(1);
+                                toast.success("删除成功！");
                             }
                         })
-
                     }
                 })
-
-
             }
         }
     }
