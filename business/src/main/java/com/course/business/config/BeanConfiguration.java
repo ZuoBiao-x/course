@@ -1,10 +1,7 @@
 package com.course.business.config;
 
 import com.course.server.config.LogAspect;
-import com.course.server.service.CategoryService;
-import com.course.server.service.ChapterService;
-import com.course.server.service.CourseService;
-import com.course.server.service.SectionService;
+import com.course.server.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,5 +30,10 @@ public class BeanConfiguration {
     @Bean
     public CategoryService getCategoryService(){
         return new CategoryService();
+    }
+
+    @Bean
+    public CourseCategoryService getCourseCategoryService(){
+        return new CourseCategoryService();
     }
 }
