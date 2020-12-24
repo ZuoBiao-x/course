@@ -116,7 +116,7 @@
             * 加上 || {} 的目的是为了防止course对象不存在
             * 因为有可能是直接访问大章页面而不是从课程页面跳转过来的，这样的话，缓存中是没有course对象的
             * */
-            let course = SessionStorage.get("course") || {};
+            let course = SessionStorage.get(SESSION_KEY_COURSE) || {};
             if(Tool.isEmpty(course)){
                 _this.$router.push("/welcome");
             }
@@ -212,7 +212,7 @@
              */
             toSection(chapter){
                 let _this = this;
-                SessionStorage.set("chapter", chapter);
+                SessionStorage.set(SESSION_KEY_CHAPTER, chapter);
                 _this.$router.push("/business/section");
             }
         }
