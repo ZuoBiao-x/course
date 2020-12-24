@@ -67,9 +67,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="chapterID" class="col-sm-2 control-label">课程ID</label>
+                                <label class="col-sm-2 control-label">课程</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="chapterID" placeholder="请输入大章ID..." v-model="chapter.courseId">
+                                    <p class="form-control-static">{{ course.name }}</p>
                                 </div>
                             </div>
                         </form>
@@ -102,7 +102,6 @@
 
             let _this = this;
             _this.$refs.pagination.size = 5;    // 初始化每页记录数
-            _this.list(1);                      // 初始化页码
 
             /*
             * 加上 || {} 的目的是为了防止course对象不存在
@@ -113,6 +112,8 @@
                 _this.$router.push("/welcome");
             }
             _this.course = course;
+
+            _this.list(1);                      // 初始化页码
         },
         methods: {
             /**
@@ -124,6 +125,7 @@
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/chapter/list',{
                     page: page,
                     size: _this.$refs.pagination.size,
+                    courseId: _this.course.id
                 }).then((response)=>{
                     Loading.hide();
                     _this.chapters = response.data.content.list;
@@ -159,10 +161,10 @@
 
                 // 保存校验
                 if (!Validator.require(_this.chapter.name, "名称")
-                    || !Validator.require(_this.chapter.courseId, "课程ID")
                     || !Validator.length(_this.chapter.courseId, "课程ID", 1, 8)) {
                     return;
                 }
+                _this.chapter.courseId = _this.course.id;
 
                 Loading.show();
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/chapter/save', _this.chapter).then((response)=>{
