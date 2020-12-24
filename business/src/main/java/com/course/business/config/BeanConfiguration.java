@@ -1,6 +1,7 @@
 package com.course.business.config;
 
 import com.course.server.config.LogAspect;
+import com.course.server.service.CategoryService;
 import com.course.server.service.ChapterService;
 import com.course.server.service.CourseService;
 import com.course.server.service.SectionService;
@@ -27,5 +28,10 @@ public class BeanConfiguration {
     @Bean
     public CourseService getCourseService(){
         return new CourseService();
+    }
+
+    @Bean
+    public CategoryService getCategoryService(){
+        return new CategoryService();
     }
 }
