@@ -1,6 +1,10 @@
 <template>
     <div>
-        <h3>{{ course.name }}</h3>
+        <h3 class="lighter">
+            <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+            <router-link to="/business/course" class="pink"> {{course.name}} </router-link>
+        </h3>
+        <hr>
 
         <p>
             <button v-on:click="add()" class="btn btn-white btn-default btn-round">
@@ -24,7 +28,6 @@
             <tr>
                 <th>ID</th>
                 <th>名称</th>
-                <th>课程ID</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -33,14 +36,20 @@
             <tr v-for="chapter in chapters">
                 <td>{{chapter.id}}</td>
                 <td>{{chapter.name}}</td>
-                <td>{{chapter.courseId}}</td>
                 <td>
                     <div class="hidden-sm hidden-xs btn-group">
-                        <button class="btn btn-xs btn-info" @click="edit(chapter)">
-                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                        <button class="btn btn-xs btn-round btn-info" @click="edit(chapter)">
+<!--                            <i class="ace-icon fa fa-pencil bigger-120"></i>-->
+                            编辑
                         </button>
-                        <button class="btn btn-xs btn-danger" @click="del(chapter.id)">
-                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                        &nbsp;
+                        <button class="btn btn-xs btn-round btn-danger" @click="del(chapter.id)">
+<!--                            <i class="ace-icon fa fa-trash-o bigger-120"></i>-->
+                            删除
+                        </button>
+                        &nbsp;
+                        <button class="btn btn-xs btn-round btn-info" @click="toSection(chapter)">
+                            小节
                         </button>
                     </div>
                 </td>
@@ -196,6 +205,15 @@
                         }
                     })
                 });
+            },
+
+            /**
+             * 点击【小节】
+             */
+            toSection(chapter){
+                let _this = this;
+                SessionStorage.set("chapter", chapter);
+                _this.$router.push("/business/section");
             }
         }
     }
