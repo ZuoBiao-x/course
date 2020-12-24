@@ -50,6 +50,9 @@
               </button>&nbsp;
               <button v-on:click="del(course.id)" class="btn btn-white btn-xs btn-warning btn-round">
                 删除
+              </button>&nbsp;
+              <button v-on:click="toCourse(course)" class="btn btn-white btn-xs btn-warning btn-round">
+                大章
               </button>
             </p>
           </div>
@@ -294,6 +297,15 @@
             }
           })
         });
+      },
+
+      /**
+       * 点击【大章】
+       */
+      toCourse(course){
+        let _this = this;
+        SessionStorage.set("course", course);
+        _this.$router.push("/business/chapter");
       }
     }
   }

@@ -1,5 +1,7 @@
 <template>
     <div>
+        <h3>{{ course.name }}</h3>
+
         <p>
             <button v-on:click="add()" class="btn btn-white btn-default btn-round">
                 <i class="ace-icon fa fa-edit"></i>
@@ -10,6 +12,11 @@
                 <i class="ace-icon fa fa-refresh"></i>
                 刷新
             </button>
+            &nbsp;
+            <router-link to="/business/course" class="btn btn-white btn-default btn-round">
+                <i class="ace-icon fa fa-arrow-left"></i>
+                回到课程
+            </router-link>
         </p>
 
         <table id="simple-table" class="table  table-bordered table-hover">
@@ -85,7 +92,8 @@
         data: function(){
             return {
                 chapters: [],
-                chapter: {}
+                chapter: {},
+                course: {}
             }
         },
         mounted: function() {
@@ -95,6 +103,16 @@
             let _this = this;
             _this.$refs.pagination.size = 5;    // 初始化每页记录数
             _this.list(1);                      // 初始化页码
+
+            /*
+            * 加上 || {} 的目的是为了防止course对象不存在
+            * 因为有可能是直接访问大章页面而不是从课程页面跳转过来的，这样的话，缓存中是没有course对象的
+            * */
+            let course = SessionStorage.get("course") || {};
+            if(Tool.isEmpty(course)){
+                _this.$router.push("/welcome");
+            }
+            _this.course = course;
         },
         methods: {
             /**
