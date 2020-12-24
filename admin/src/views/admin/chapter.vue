@@ -107,7 +107,7 @@
         },
         mounted: function() {
             // sidebar激活样式方法一
-            // this.$parent.activeSidebar("business-chapter-sidebar");
+            this.$parent.activeSidebar("business-course-sidebar");
 
             let _this = this;
             _this.$refs.pagination.size = 5;    // 初始化每页记录数
