@@ -17,7 +17,7 @@
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
-            <th>id</th>
+                    <th>id</th>
             <th>名称</th>
             <th>概述</th>
             <th>时长</th>
@@ -34,17 +34,17 @@
 
       <tbody>
       <tr v-for="course in courses">
-        <td>{{course.id}}</td>
-        <td>{{course.name}}</td>
-        <td>{{course.summary}}</td>
-        <td>{{course.time}}</td>
-        <td>{{course.price}}</td>
-        <td>{{course.image}}</td>
-        <td>{{COURSE_LEVEL | optionKV(course.level)}}</td>
-        <td>{{COURSE_CHARGE | optionKV(course.charge)}}</td>
-        <td>{{COURSE_STATUS | optionKV(course.status)}}</td>
-        <td>{{course.enroll}}</td>
-        <td>{{course.sort}}</td>
+              <td>{{course.id}}</td>
+              <td>{{course.name}}</td>
+              <td>{{course.summary}}</td>
+              <td>{{course.time}}</td>
+              <td>{{course.price}}</td>
+              <td>{{course.image}}</td>
+              <td>{{COURSE_LEVEL | optionKV(course.level)}}</td>
+              <td>{{COURSE_CHARGE | optionKV(course.charge)}}</td>
+              <td>{{COURSE_STATUS | optionKV(course.status)}}</td>
+              <td>{{course.enroll}}</td>
+              <td>{{course.sort}}</td>
       <td>
         <div class="hidden-sm hidden-xs btn-group">
           <button v-on:click="edit(course)" class="btn btn-xs btn-info">
@@ -154,10 +154,10 @@
     data: function() {
       return {
         course: {},
-        courses: [],
-        COURSE_LEVEL: COURSE_LEVEL,
-        COURSE_CHARGE: COURSE_CHARGE,
-        COURSE_STATUS: COURSE_STATUS,
+      courses: [],
+      COURSE_LEVEL: COURSE_LEVEL,
+      COURSE_CHARGE: COURSE_CHARGE,
+      COURSE_STATUS: COURSE_STATUS,
       }
     },
     mounted: function() {
