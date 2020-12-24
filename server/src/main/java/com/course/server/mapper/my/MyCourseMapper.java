@@ -1,5 +1,6 @@
 package com.course.server.mapper.my;
 
+import com.course.server.dto.SortDto;
 import org.apache.ibatis.annotations.Param;
 
 public interface MyCourseMapper {
@@ -9,4 +10,13 @@ public interface MyCourseMapper {
      * @return
      */
     int updateTime(@Param("courseId") String courseId);
+
+    /*
+    * 用于修改课程顺序的三个方法
+    * */
+    int updateSort(SortDto sortDto);
+
+    int moveSortsBackward(SortDto sortDto);
+
+    int moveSortsForward(SortDto sortDto);
 }
