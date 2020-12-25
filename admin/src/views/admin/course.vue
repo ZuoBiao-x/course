@@ -486,7 +486,7 @@
           let resp = response.data;
           if (resp.success) {
             // toast.success("内容保存成功");
-            let now = Tool.dateFormat("HH:mm:ss");
+            let now = Tool.dateFormat("yy-MM-dd hh:mm:ss");
             _this.saveContentLabel = "最后保存时间：" + now;
           } else {
             toast.warning(resp.message);
