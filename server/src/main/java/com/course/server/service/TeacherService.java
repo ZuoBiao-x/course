@@ -35,6 +35,15 @@ public class TeacherService {
     }
 
     /**
+     * 查询所有
+     */
+    public List<TeacherDto> all() {
+        TeacherExample teacherExample = new TeacherExample();
+        List<Teacher> teacherList = teacherMapper.selectByExample(teacherExample);
+        return CopyUtil.copyList(teacherList, TeacherDto.class);
+    }
+
+    /**
      * 保存，id有值时更新，无值时新增
      */
     public void save(TeacherDto teacherDto) {
