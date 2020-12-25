@@ -36,4 +36,9 @@ public class BeanConfiguration {
     public CourseCategoryService getCourseCategoryService(){
         return new CourseCategoryService();
     }
+
+    @Bean
+    public TeacherService getTeacherService(){
+        return new TeacherService();
+    }
 }
