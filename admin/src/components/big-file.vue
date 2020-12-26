@@ -117,7 +117,8 @@
                 let shardIndex = param.shardIndex;
                 let shardTotal = param.shardTotal;
                 let shardSize = param.shardSize;
-                let fileShard = _this.getFileShard(shardIndex, shardSize);
+                let size = param.size;
+                let fileShard = _this.getFileShard(shardIndex, shardSize, size);
                 // 将图片转为base64进行传输
                 let fileReader = new FileReader();
                 fileReader.onload = function (e) {
@@ -144,12 +145,12 @@
                 fileReader.readAsDataURL(fileShard);
             },
 
-            getFileShard: function (shardIndex, shardSize) {
+            getFileShard: function (shardIndex, shardSize, size) {
                 let _this = this;
                 let file = _this.$refs.file.files[0];
-                let start = (shardIndex - 1) * shardSize;	//当前分片起始位置
-                let end = Math.min(file.size, start + shardSize); //当前分片结束位置
-                let fileShard = file.slice(start, end); //从文件中截取当前的分片数据
+                let start = (shardIndex - 1) * shardSize;	    //当前分片起始位置
+                let end = Math.min(size, start + shardSize);    //当前分片结束位置
+                let fileShard = file.slice(start, end);         //从文件中截取当前的分片数据
                 return fileShard;
             },
 

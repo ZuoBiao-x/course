@@ -5,7 +5,6 @@ import com.course.server.dto.ResponseDto;
 import com.course.server.enums.FileUseEnum;
 import com.course.server.service.FileService;
 import com.course.server.util.Base64ToMultipartFile;
-import com.course.server.util.UuidUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,8 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+@RequestMapping("/admin")
 @RestController
-@RequestMapping(value = "/admin")
 public class UploadController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UploadController.class);
@@ -35,8 +34,8 @@ public class UploadController {
     @Resource
     private FileService fileService;
 
-    @PostMapping(value = "/upload")
-    public ResponseDto upload(@RequestBody FileDto fileDto) throws IOException {
+    @RequestMapping("/upload")
+    public ResponseDto upload(@RequestBody FileDto fileDto) throws Exception {
         LOG.info("上传文件开始");
         String use = fileDto.getUse();
         String key = fileDto.getKey();
@@ -54,57 +53,54 @@ public class UploadController {
             fullDir.mkdir();
         }
 
-//        String path = dir + File.separator + key + "." + suffix;
+//        String path = dir + File.separator + key + "." + suffix + "." + fileDto.getShardIndex();
         String path = new StringBuffer(dir)
                 .append(File.separator)
                 .append(key)
                 .append(".")
                 .append(suffix)
+                .toString(); // course\6sfSqfOwzmik4A4icMYuUe.mp4
+        String localPath = new StringBuffer(path)
                 .append(".")
                 .append(fileDto.getShardIndex())
-                .toString();
-        String fullPath = FILE_PATH + path;
+                .toString(); // course\6sfSqfOwzmik4A4icMYuUe.mp4.1
+        String fullPath = FILE_PATH + localPath;
         File dest = new File(fullPath);
         shard.transferTo(dest);
         LOG.info(dest.getAbsolutePath());
 
-        // 保存文件记录
         LOG.info("保存文件记录开始");
         fileDto.setPath(path);
         fileService.save(fileDto);
 
         ResponseDto responseDto = new ResponseDto();
-        // 将文件保存后的地址返回给前端（地址中的资源是经过配置好静态资源之后的）
-//        responseDto.setContent("http://127.0.0.1:9000/file/f/teacher/" + key + "-" + fileName);
         fileDto.setPath(FILE_DOMAIN + path);
         responseDto.setContent(fileDto);
+
+        if (fileDto.getShardIndex() == fileDto.getShardTotal()) {
+            this.merge(fileDto);
+        }
         return responseDto;
     }
 
-    /**
-     * 合并多个文件切片为一个文件
-     * @return
-     * @throws Exception
-     */
-    @GetMapping("/merge")
-    public ResponseDto merge() throws Exception {
-        File newFile = new File(FILE_PATH + "/course/test123.mp4");
+    public void merge(FileDto fileDto) throws Exception {
+        LOG.info("合并分片开始");
+        String path = fileDto.getPath(); //http://127.0.0.1:9000/file/f/course\6sfSqfOwzmik4A4icMYuUe.mp4
+        path = path.replace(FILE_DOMAIN, ""); //course\6sfSqfOwzmik4A4icMYuUe.mp4
+        Integer shardTotal = fileDto.getShardTotal();
+        File newFile = new File(FILE_PATH + path);
         FileOutputStream outputStream = new FileOutputStream(newFile, true);//文件追加写入
         FileInputStream fileInputStream = null;//分片文件
         byte[] byt = new byte[10 * 1024 * 1024];
         int len;
 
         try {
-            // 读取第一个分片
-            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/6rrbxjpc.blob"));
-            while ((len = fileInputStream.read(byt)) != -1) {
-                outputStream.write(byt, 0, len);
-            }
-
-            // 读取第二个分片
-            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/xrto9WBR.blob"));
-            while ((len = fileInputStream.read(byt)) != -1) {
-                outputStream.write(byt, 0, len);
+            for (int i = 0; i < shardTotal; i++) {
+                // 读取第i个分片
+                fileInputStream = new FileInputStream(new File(FILE_PATH + path + "." + (i + 1))); //  course\6sfSqfOwzmik4A4icMYuUe.mp4.1
+                while ((len = fileInputStream.read(byt)) != -1) {
+                    outputStream.write(byt, 0, len);
+                }
             }
         } catch (IOException e) {
             LOG.error("分片合并异常", e);
@@ -119,7 +115,6 @@ public class UploadController {
                 LOG.error("IO流关闭", e);
             }
         }
-        ResponseDto responseDto = new ResponseDto();
-        return responseDto;
+        LOG.info("合并分片结束");
     }
 }
