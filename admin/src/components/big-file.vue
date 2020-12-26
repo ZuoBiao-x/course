@@ -36,7 +36,7 @@
         methods: {
             uploadFile () {
                 let _this = this;
-                let formData = new window.FormData();
+                // let formData = new window.FormData();
                 let file = _this.$refs.file.files[0];
 
                 console.log(file);
@@ -87,7 +87,7 @@
                 let shardTotal = Math.ceil(size / shardSize); //总片数
 
                 // key："shard"必须和后端controller参数名一致
-                formData.append('shard', fileShard);
+                /*formData.append('shard', fileShard);
                 formData.append('shardIndex', shardIndex);
                 formData.append('shardSize', shardSize);
                 formData.append('shardTotal', shardTotal);
@@ -103,7 +103,36 @@
                     console.log("上传文件成功：", resp);
                     _this.afterUpload(resp);
                     $("#" + _this.inputId + "-input").val("");
-                });
+                });*/
+
+                // 将图片转为base64进行传输
+                let fileReader = new FileReader();
+                fileReader.onload = function(e) {
+                    let base64 = e.target.result;
+                    // console.log("base64:", base64);
+
+                    let param = {
+                        'shard': base64,
+                        'shardIndex': shardIndex,
+                        'shardSize': shardSize,
+                        'shardTotal': shardTotal,
+                        'use': _this.use,
+                        'name': file.name,
+                        'suffix': suffix,
+                        'size': file.size,
+                        'key': key62
+                    };
+
+                    Loading.show();
+                    _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/upload', param).then((response)=>{
+                        Loading.hide();
+                        let resp = response.data;
+                        console.log("上传文件成功：", resp);
+                        _this.afterUpload(resp);
+                        $("#" + _this.inputId + "-input").val("");
+                    });
+                };
+                fileReader.readAsDataURL(fileShard);
             },
 
             selectFile () {
