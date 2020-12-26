@@ -116,5 +116,19 @@ public class UploadController {
             }
         }
         LOG.info("合并分片结束");
+
+        // 提醒垃圾回收机制可以回收垃圾，从而已经合并完成的分片就不是在被程序占用着了
+        // 从而下面的删除文件才会成功
+        System.gc();
+
+        // 删除分片
+        LOG.info("删除分片开始");
+        for (int i = 0; i < shardTotal; i++) {
+            String filePath = FILE_PATH + path + "." + (i + 1);
+            File file = new File(filePath);
+            boolean result = file.delete();
+            LOG.info("删除{}，{}", filePath, result ? "成功" : "失败");
+        }
+        LOG.info("删除分片结束");
     }
 }
