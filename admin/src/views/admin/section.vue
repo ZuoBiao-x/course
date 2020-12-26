@@ -101,7 +101,7 @@
                         v-bind:after-upload="afterUpload"></file>
                   <div v-show="section.video" class="row">
                     <div class="col-md-9">
-                      <video v-bind:src="section.video" controls="controls"></video>
+                      <video v-bind:src="section.video" controls="controls" id="video" ></video>
                     </div>
                   </div>
                 </div>
@@ -259,11 +259,25 @@
         });
       },
 
+      /**
+       * 文件上传完成后需要被执行的钩子函数
+       * @param resp
+       */
       afterUpload(resp) {
         let _this = this;
         let video = resp.content.path;
         _this.section.video = video;
-      }
+        _this.getTime();
+      },
+
+      /**
+       * 获取时长
+       */
+      getTime() {
+        let _this = this;
+        let ele = document.getElementById("video");
+        _this.section.time = parseInt(ele.duration, 10);
+      },
     }
   }
 </script>
