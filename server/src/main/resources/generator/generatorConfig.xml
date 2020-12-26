@@ -8,6 +8,8 @@
 
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
+        <!--检测到列名为数据库关键字时，会在SQL中的该字段上加上反引号-->
+        <property name="autoDelimitKeywords" value="true"/>
 
         <!-- 生成的实体类添加toString()方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
@@ -42,9 +44,10 @@
 <!--        <table tableName="chapter" domainObjectName="Chapter"/>-->
 <!--        <table tableName="section" domainObjectName="Section"/>-->
 <!--        <table tableName="category" domainObjectName="Category"/>-->
-        <table tableName="course" domainObjectName="Course"/>
+<!--        <table tableName="course" domainObjectName="Course"/>-->
 <!--        <table tableName="course_category" domainObjectName="CourseCategory"/>-->
 <!--        <table tableName="course_content" domainObjectName="CourseContent"/>-->
 <!--        <table tableName="teacher" domainObjectName="Teacher"/>-->
+        <table tableName="file" domainObjectName="File"/>
     </context>
 </generatorConfiguration>
