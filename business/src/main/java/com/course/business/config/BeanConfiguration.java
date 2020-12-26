@@ -41,4 +41,9 @@ public class BeanConfiguration {
     public TeacherService getTeacherService(){
         return new TeacherService();
     }
+
+    @Bean
+    public CourseContentFileService getCourseContentFileService(){
+        return new CourseContentFileService();
+    }
 }
