@@ -73,7 +73,8 @@ public class UploadController {
         ResponseDto responseDto = new ResponseDto();
         // 将文件保存后的地址返回给前端（地址中的资源是经过配置好静态资源之后的）
 //        responseDto.setContent("http://127.0.0.1:9000/file/f/teacher/" + key + "-" + fileName);
-        responseDto.setContent(FILE_DOMAIN + path);
+        fileDto.setPath(FILE_DOMAIN + path);
+        responseDto.setContent(fileDto);
         return responseDto;
     }
 }
