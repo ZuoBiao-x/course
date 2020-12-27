@@ -28,19 +28,19 @@ public class OssController {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileController.class);
 
-    @Value("${accessKeyId}")
+    @Value("${oss.accessKeyId}")
     private String accessKeyId;
 
-    @Value("${accessKeySecret}")
+    @Value("${oss.accessKeySecret}")
     private String accessKeySecret;
 
-    @Value("${endpoint}")
+    @Value("${oss.endpoint}")
     private String endpoint;
 
-    @Value("${bucket}")
+    @Value("${oss.bucket}")
     private String bucket;
 
-    @Value("${ossDomain}")
+    @Value("${oss.domain}")
     private String ossDomain;
 
     public static final String BUSINESS_NAME = "文件上传";
@@ -65,31 +65,18 @@ public class OssController {
         String shardBase64 = fileDto.getShard();
         MultipartFile shard = Base64ToMultipartFile.base64ToMultipart(shardBase64);
 
-        // 保存文件到本地
+        // 获取文件用途
         FileUseEnum useEnum = FileUseEnum.getByCode(use);
 
-//        //如果文件夹不存在则创建
+        // 文件夹名称
         String dir = useEnum.name().toLowerCase();
-//        File fullDir = new File(FILE_PATH + dir);
-//        if (!fullDir.exists()) {
-//            fullDir.mkdir();
-//        }
 
-//        String path = dir + File.separator + key + "." + suffix + "." + fileDto.getShardIndex();
         String path = new StringBuffer(dir)
                 .append("/")
                 .append(key)
                 .append(".")
                 .append(suffix)
                 .toString(); // course\6sfSqfOwzmik4A4icMYuUe.mp4
-//        String localPath = new StringBuffer(path)
-//                .append(".")
-//                .append(fileDto.getShardIndex())
-//                .toString(); // course\6sfSqfOwzmik4A4icMYuUe.mp4.1
-//        String fullPath = FILE_PATH + localPath;
-//        File dest = new File(fullPath);
-//        shard.transferTo(dest);
-//        LOG.info(dest.getAbsolutePath());
 
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
