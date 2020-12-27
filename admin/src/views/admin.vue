@@ -486,6 +486,9 @@
             $('body').attr('class', 'no-skin');
             // sidebar激活样式方法二
             _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar");
+
+            // 重新加载一遍ace的js文件
+            $.getScript('/ace/assets/js/ace.min.js');
         },
         watch: {
             $route: {
