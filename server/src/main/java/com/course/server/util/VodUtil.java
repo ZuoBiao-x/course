@@ -43,9 +43,14 @@ public class VodUtil {
         request.setTitle("this is title");
         //request.setDescription("this is desc");
         //request.setTags("tag1,tag2");
-        //request.setCoverURL("http://vod.aliyun.com/test_cover_url.jpg");
-        //request.setCateId(-1L);
-        //request.setTemplateGroupId("");
+        request.setCoverURL("http://vod.aliyun.com/test_cover_url.jpg");
+
+        // 设置好的分类id
+        request.setCateId(1000224991L);
+
+        // 设置好的转码模板组id
+        request.setTemplateGroupId("d7c22ae2aecc8854c98e8c00aaac942f");
+
         //request.setWorkflowId("");
         //request.setStorageLocation("");
         //request.setAppId("app-1000000");
