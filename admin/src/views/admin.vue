@@ -354,7 +354,7 @@
                     <li class="" id="welcome-sidebar">
                         <router-link to="/welcome">
                             <i class="menu-icon fa fa-tachometer"></i>
-                            <span class="menu-text"> 欢迎使用！ </span>
+                            <span class="menu-text"> 欢迎：{{loginUser.name}} </span>
                         </router-link>
                         <b class="arrow"></b>
                     </li>
@@ -489,6 +489,14 @@
 
             // 重新加载一遍ace的js文件
             $.getScript('/ace/assets/js/ace.min.js');
+
+            // 获取成功登录的用户的信息
+            _this.loginUser = Tool.getLoginUser();
+        },
+        data: function() {
+            return {
+                loginUser: {},
+            }
         },
         watch: {
             $route: {
