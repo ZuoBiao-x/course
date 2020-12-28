@@ -136,6 +136,7 @@
 						toast.warning(resp.message);
 						_this.user.password = "";
 						_this.loadImageCode();
+						_this.user.imageCode = "";
 					}
 				});
             },

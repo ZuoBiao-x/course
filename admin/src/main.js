@@ -7,8 +7,12 @@ import filter from './filter/filter'
 Vue.config.productionTip = false;
 
 // 此处可以理解为将 axios 对象赋值给 $ajax 对象
-// 又因为 Vue.prototype.xxx 表示的对象为全局对象，所以，可以在之后的组件中通过 this.$ajax 来使用 $ajax 对象
+// 又因为 Vue.prototype.xxx 表示的对象为全局对象
+// 所以，可以在之后的组件中通过 this.$ajax 来使用 $ajax 对象
 Vue.prototype.$ajax = axios;
+
+// 解决每次ajax请求，对应的sessionId不一致的问题
+axios.defaults.withCredentials = true;
 
 /**
  * axios拦截器
