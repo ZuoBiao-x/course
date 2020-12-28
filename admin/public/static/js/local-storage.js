@@ -7,6 +7,9 @@
 *
 * localStorage和sessionStorage只能操作字符串，但是我们经常要放对象数据,所以封装一下
 * */
+
+LOCAL_KEY_REMEMBER_USER = "LOCAL_KEY_REMEMBER_USER"; // 用户点击记住我时，保存信息到LocalStorage
+
 LocalStorage = {
     get: function (key) {
         let v = localStorage.getItem(key);
