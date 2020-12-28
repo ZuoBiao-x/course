@@ -27,8 +27,6 @@ public class KaptchaController {
     public void imageCode(@PathVariable(value = "imageCodeToken") String imageCodeToken, HttpServletRequest request, HttpServletResponse httpServletResponse) throws Exception{
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
         try {
-            System.out.println(defaultKaptcha==null);
-
             // 生成验证码字符串
             String createText = defaultKaptcha.createText();
 
