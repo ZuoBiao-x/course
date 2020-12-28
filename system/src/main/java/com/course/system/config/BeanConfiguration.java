@@ -1,7 +1,6 @@
 package com.course.system.config;
 
-import com.course.server.config.LogAspect;
-import com.course.server.service.*;
+import com.course.server.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

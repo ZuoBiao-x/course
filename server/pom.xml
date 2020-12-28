@@ -64,5 +64,13 @@
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
         </dependency>
+
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <!--此处需要加入版本号，否则会报错-->
+            <version>2.2.2.RELEASE</version>
+        </dependency>
     </dependencies>
 </project>
