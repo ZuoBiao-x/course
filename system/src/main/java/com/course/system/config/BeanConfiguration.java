@@ -1,6 +1,7 @@
 package com.course.system.config;
 
 import com.course.server.service.ResourceService;
+import com.course.server.service.RoleResourceService;
 import com.course.server.service.RoleService;
 import com.course.server.service.UserService;
 import org.springframework.context.annotation.Bean;
@@ -21,5 +22,10 @@ public class BeanConfiguration {
     @Bean
     public RoleService getRoleService(){
         return new RoleService();
+    }
+
+    @Bean
+    public RoleResourceService getRoleResourceService(){
+        return new RoleResourceService();
     }
 }
