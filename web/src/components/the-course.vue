@@ -11,7 +11,7 @@
                 <div class="text-muted">
                     <span class="badge badge-info"><i class="fa fa-yen" aria-hidden="true"></i>&nbsp;{{course.price}}</span>&nbsp;
                     <span class="badge badge-info"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;123</span>&nbsp;
-<!--                    <span class="badge badge-info">{{COURSE_LEVEL | optionKV(course.level)}}</span>-->
+                    <span class="badge badge-info">{{COURSE_LEVEL | optionKV(course.level)}}</span>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
         },
         data: function () {
             return {
-                // COURSE_LEVEL: COURSE_LEVEL,
+                COURSE_LEVEL: COURSE_LEVEL,
             }
         },
     }
