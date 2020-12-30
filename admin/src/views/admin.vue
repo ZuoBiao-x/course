@@ -499,6 +499,11 @@
 
             // 获取成功登录的用户的信息
             _this.loginUser = Tool.getLoginUser();
+
+            // admin页面也是需要进行权限判断通过后才能显示的
+            if (!_this.hasResourceRouter(_this.$route.name)) {
+                _this.$router.push("/login");
+            }
         },
         data: function() {
             return {
@@ -511,6 +516,14 @@
                     // sidebar激活样式方法二
                     // console.log("---->页面跳转：", val, oldVal);
                     let _this = this;
+
+                    // 因为都是在admin父组件上跳转子组件，
+                    // 而子组件跳转的时候是会触发watch的，所以在这里进行路由的权限判断
+                    if (!_this.hasResourceRouter(val.name)) {
+                        _this.$router.push("/login");
+                        return;
+                    }
+
                     _this.$nextTick(function(){  //页面加载完成后执行
                         _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar");
                     })
@@ -541,11 +554,29 @@
             },
 
             /**
-             * 查找是否有权限
+             * 查找是否有权限(资源)
              * @param id
              */
             hasResource(id) {
                 return Tool.hasResource(id);
+            },
+
+            /**
+             * 查找是否有权限(路由)
+             * @param router
+             */
+            hasResourceRouter(router) {
+                // let _this = this;
+                let resources = Tool.getLoginUser().resources;
+                if (Tool.isEmpty(resources)) {
+                    return false;
+                }
+                for (let i = 0; i < resources.length; i++) {
+                    if (router === resources[i].page) {
+                        return true;
+                    }
+                }
+                return false;
             },
 
             logout () {
