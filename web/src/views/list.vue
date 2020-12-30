@@ -149,7 +149,8 @@
              * @param level1Id
              */
             onClickLevel2(level2Id) {
-                // let _this = this;
+                $("#category-" + level2Id).siblings("a").removeClass("on");
+                $("#category-" + level2Id).addClass("on");
             },
 
         }
