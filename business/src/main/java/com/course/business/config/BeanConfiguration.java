@@ -46,4 +46,9 @@ public class BeanConfiguration {
     public CourseContentFileService getCourseContentFileService(){
         return new CourseContentFileService();
     }
+
+    @Bean
+    public MemberService getMemberService(){
+        return new MemberService();
+    }
 }
