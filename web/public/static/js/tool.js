@@ -86,21 +86,17 @@ Tool = {
     },
 
     /**
-     * 保存登录用户信息
+     * 保存登录会员信息
      */
-    setLoginUser: function (loginUser) {
-        SessionStorage.set(SESSION_KEY_LOGIN_USER, loginUser);
+    setLoginMember: function (loginMember) {
+        SessionStorage.set(SESSION_KEY_LOGIN_MEMBER, loginMember);
     },
 
     /**
-     * 获取登录用户信息
+     * 获取登录会员信息
      */
-    getLoginUser: function () {
-        return SessionStorage.get(SESSION_KEY_LOGIN_USER) || {};
-    },
-
-    getLoginUser: function () {
-        return SessionStorage.get(SESSION_KEY_LOGIN_USER) || {};
+    getLoginMember: function () {
+        return SessionStorage.get(SESSION_KEY_LOGIN_MEMBER) || {};
     },
 
     /**
@@ -119,24 +115,6 @@ Tool = {
         }
 
         return uuid.join('');
-    },
-
-    /**
-     * 查找是否有权限
-     * @param id 资源id
-     */
-    hasResource: function (id) {
-        let _this = this;
-        let resources = _this.getLoginUser().resources;
-        if (_this.isEmpty(resources)) {
-            return false;
-        }
-        for (let i = 0; i < resources.length; i++) {
-            if (id === resources[i].id) {
-                return true;
-            }
-        }
-        return false;
     },
 
     /**
