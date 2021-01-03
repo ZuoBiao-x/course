@@ -56,4 +56,9 @@ public class BeanConfiguration {
     public SmsService getSmsService(){
         return new SmsService();
     }
+
+    @Bean
+    public MemberCourseService getMemberCourseService(){
+        return new MemberCourseService();
+    }
 }
