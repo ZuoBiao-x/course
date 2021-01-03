@@ -36,12 +36,13 @@ public class MemberCourseController {
     }
 
     /**
-     * 删除
+     * 查找是否已经报名
      */
-    @DeleteMapping("/delete/{id}")
-    public ResponseDto delete(@PathVariable String id) {
+    @PostMapping("/get-enroll")
+    public ResponseDto getEnroll(@RequestBody MemberCourseDto memberCourseDto) {
         ResponseDto responseDto = new ResponseDto();
-        memberCourseService.delete(id);
+        memberCourseDto = memberCourseService.getEnroll(memberCourseDto);
+        responseDto.setContent(memberCourseDto);
         return responseDto;
     }
 }
