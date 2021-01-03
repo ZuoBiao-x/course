@@ -42,8 +42,11 @@
                     <div class="register-div" v-show="MODAL_STATUS === STATUS_REGISTER">
                         <h3>注&nbsp;&nbsp;册</h3>
                         <div class="form-group">
-                            <input id="register-mobile" v-model="memberRegister.mobile"
+                            <input v-on:blur="onRegisterMobileBlur()"
+                                   v-bind:class="registerMobileValidateClass"
+                                   id="register-mobile" v-model="memberRegister.mobile"
                                    class="form-control" placeholder="手机号">
+                            <span v-show="registerMobileValidate === false" class="text-danger">手机号11位数字，且不能重复</span>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
@@ -135,8 +138,19 @@
                 memberRegister: {},
 
                 remember: true, // 记住密码
-                imageCodeToken: ""
+                imageCodeToken: "",
+
+                // 注册框显示错误信息
+                registerMobileValidate: null,
             }
+        },
+        computed: {
+            registerMobileValidateClass: function () {
+                return {
+                    'border-success': this.registerMobileValidate === true,
+                    'border-danger': this.registerMobileValidate === false,
+                }
+            },
         },
         mounted() {
             let _this = this;
@@ -254,6 +268,12 @@
              */
             sendSmsForRegister() {
                 let _this = this;
+
+                // 手机号验证没通过则不发送
+                if (!_this.onRegisterMobileBlur()) {
+                    return false;
+                }
+
                 let sms = {
                     mobile: _this.memberRegister.mobile,
                     use: SMS_USE.REGISTER.key
@@ -312,7 +332,15 @@
                 setTimeout(function () {
                     _this.setTime(btnId);
                 }, 1000);
-            }
+            },
+
+            //-------------------------------- 注册框校验 ----------------------------
+
+            onRegisterMobileBlur () {
+                let _this = this;
+                _this.registerMobileValidate = Pattern.validateMobile(_this.memberRegister.mobile);
+                return _this.registerMobileValidate;
+            },
         }
     }
 </script>
