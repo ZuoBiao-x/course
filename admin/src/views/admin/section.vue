@@ -293,6 +293,9 @@
         _this.section.vod = vod;
         _this.getTime();
         _this.$refs.player.playUrl(video);
+
+        // 解决不能实时预览的问题
+        _this.$forceUpdate();
       },
 
       /**
