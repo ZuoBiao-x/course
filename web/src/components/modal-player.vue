@@ -19,6 +19,7 @@
         aliPlayer: {}, // 播放器实例
       }
     },
+
     mounted() {
       let _this = this;
       // 当关闭模态框时，暂停播放
@@ -26,6 +27,7 @@
         _this.$refs.player.pause();
       })
     },
+
     methods: {
       playUrl(url) {
         let _this = this;
