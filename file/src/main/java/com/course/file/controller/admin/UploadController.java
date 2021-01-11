@@ -43,6 +43,9 @@ public class UploadController {
     @Value("${vod.accessKeySecret}")
     private String accessKeySecret;
 
+    @Value("${oss.domain}")
+    private String OSS_DOMAIN;
+
     @Resource
     private FileService fileService;
 
@@ -155,7 +158,7 @@ public class UploadController {
         if (fileDto != null) {
             // 根据是否有vod值来判断文件的具体存储位置，从而返回不同的地址值
             if (StringUtils.isEmpty(fileDto.getVod())) {
-                fileDto.setPath(FILE_DOMAIN + fileDto.getPath());
+                fileDto.setPath(OSS_DOMAIN + fileDto.getPath());
             } else {
                 DefaultAcsClient vodClient = VodUtil.initVodClient(accessKeyId, accessKeySecret);
                 GetMezzanineInfoResponse response = VodUtil.getMezzanineInfo(vodClient, fileDto.getVod());
