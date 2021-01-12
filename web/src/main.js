@@ -8,6 +8,9 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$ajax = axios;
 
+//事件总线 EventBus
+Vue.prototype.$event = new Vue();
+
 // 全局过滤器
 Object.keys(filter).forEach(key => {
   Vue.filter(key, filter[key])

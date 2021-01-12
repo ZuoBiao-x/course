@@ -165,7 +165,11 @@
                 if (section.charge === _this.SECTION_CHARGE.CHARGE.key ) {
                     let loginMember = Tool.getLoginMember();
                     if (Tool.isEmpty(loginMember)) {
-                        toast.warning("请先登录");
+                        // toast.warning("请先登录");
+
+                        // 触发打开登录窗口事件，用到事件总线
+                        // _this.$event.$emit("openLoginModal", "此处为需要传递的参数");
+                        _this.$event.$emit("openLoginModal");
                         return;
                     } else {
                         if (Tool.isEmpty(_this.memberCourse)) {
