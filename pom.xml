@@ -70,6 +70,7 @@
                 <groupId>com.zuobiao</groupId>
                 <artifactId>server</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
+                <scope>compile</scope>
             </dependency>
             <!-- mybatis分页插件pagehelper -->
             <dependency>
