@@ -510,7 +510,7 @@
 
             // 重新加载一遍ace的js文件
             // 现在使用js原生的方式从登陆页面跳转到此页面，所以不再需要重新加载资源
-            // $.getScript('/ace/assets/js/ace.min.js');
+            $.getScript('/ace/assets/js/ace.min.js');
 
             // 获取成功登录的用户的信息
             _this.loginUser = Tool.getLoginUser();
