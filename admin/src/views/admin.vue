@@ -15,7 +15,8 @@
                 <div class="navbar-header pull-left">
                     <a href="index.html" class="navbar-brand">
                         <small>
-                            <i class="fa fa-leaf"></i>
+<!--                            <i class="fa fa-leaf"></i>-->
+                            <img src="https://zuobiao-course.oss-cn-hangzhou.aliyuncs.com/icon/course.png">
                             CourseOnline
                         </small>
                     </a>
