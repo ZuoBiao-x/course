@@ -27,16 +27,16 @@
         <div class="album py-5 bg-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <pagination ref="pagination" v-bind:list="listCourse"></pagination>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
                     <div v-for="o in courses" class="col-md-4" :key="o.item">
                         <the-course v-bind:course="o"></the-course>
                     </div>
                     <h3 v-show="courses.length === 0">课程还未上架</h3>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <pagination ref="pagination" v-bind:list="listCourse"></pagination>
+                    </div>
                 </div>
             </div>
         </div>

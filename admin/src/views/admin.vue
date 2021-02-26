@@ -16,7 +16,7 @@
                     <a href="index.html" class="navbar-brand">
                         <small>
                             <i class="fa fa-leaf"></i>
-                            在线视频系统
+                            CourseOnline
                         </small>
                     </a>
                 </div>
@@ -477,7 +477,7 @@
                 <div class="footer-inner">
                     <div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">_跑调大叔_</span>
+							<span class="blue bolder">CourseOnline</span>
 							在线视频系统 &copy; 2020-2030
 						</span>
                         <span class="action-buttons">

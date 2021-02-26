@@ -4,8 +4,10 @@
             <p class="float-right">
                 <a href="#">回到顶部</a>
             </p>
-            <p>欢迎使用甲蛙在线视频课程系统，程序员的梦工厂，致力于全栈技术推广</p>
-            <p>2099&nbsp;imooc.com&nbsp;&nbsp;京ICP备 1234567890号</p>
+            <div class="align-center">
+                <p>欢迎使用 CourseOnline 视频课程系统，程序员的梦工厂，致力于全栈技术推广</p>
+                <p><a href="www.zuobiao.site">www.zuobiao.site</a> 湘ICP备2020020469号</p>
+            </div>
         </div>
     </footer>
 </template>
