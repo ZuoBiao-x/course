@@ -63,8 +63,8 @@
         },
         mounted() {
             let _this = this;
-            _this.listCourse(1);
             _this.$refs.pagination.size = 6;
+            _this.listCourse(1);
             _this.allCategory();
         },
         methods: {
