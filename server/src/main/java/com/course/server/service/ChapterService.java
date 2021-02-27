@@ -101,7 +101,9 @@ public class ChapterService {
      */
     public List<ChapterDto> listByCourse(String courseId) {
         ChapterExample example = new ChapterExample();
-        example.createCriteria().andCourseIdEqualTo(courseId);
+        ChapterExample.Criteria criteria = example.createCriteria();
+        criteria.andCourseIdEqualTo(courseId);
+        example.setOrderByClause("created_at");
         List<Chapter> chapterList = chapterMapper.selectByExample(example);
         List<ChapterDto> chapterDtoList = CopyUtil.copyList(chapterList, ChapterDto.class);
         return chapterDtoList;
